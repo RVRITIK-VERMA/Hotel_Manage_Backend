@@ -8,6 +8,7 @@ const sequelize = new Sequelize({
     username: "postgres",
     password: "postgres431",
     database: "Hotel_Management",
+    dialectModule: pg, 
     // Other options as needed
     dialectOptions: {
         ssl: {
