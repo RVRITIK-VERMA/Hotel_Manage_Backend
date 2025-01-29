@@ -1,12 +1,13 @@
 const { QueryTypes } = require('sequelize');
-const sequelize = require('../Database/db');
+
+const db = require('../Database/db');
 
 // Retrieve owner details
 const getOwnerDetails = async (req, res) => {
     const { ownerName } = req.body;
 
     try {
-        const ownerDetails = await sequelize.query(
+        const ownerDetails = await db.sequelize.query(
             'SELECT * FROM get_registration_data(:p_owner_name)',
             {
                 replacements: { p_owner_name: ownerName },
@@ -31,7 +32,7 @@ const registerOwner = async (req,res)=>{
     const {action, name, roomsBooked, totalBooked} = req.body;
 
     try{
-        const result = await sequelize.query(
+        const result = await db.sequelize.query(
             'Call Insert_Update_hotel_Data (:p_action,:p_name,:p_rooms_booked,:p_total_booked,:p_status)',{
                 replacements:{
                     p_action:action,
@@ -61,7 +62,7 @@ const registerOwner = async (req,res)=>{
 const getAllUsers = async (req, res) => {
 
     try {
-        const userDetails = await sequelize.query(
+        const userDetails = await db.sequelize.query(
             'SELECT * FROM get_user_data()',
             {
                 type: QueryTypes.SELECT

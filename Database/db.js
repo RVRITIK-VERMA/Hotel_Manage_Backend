@@ -1,24 +1,25 @@
-const { Sequelize } = require('sequelize');
-require('dotenv').config(); 
+require('dotenv').config();
+const {Sequelize}= require('sequelize');
 
-//Connecting to our  PostgreSQL database
-const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD, {
-        host: process.env.DB_HOST,
-        dialect: 'postgres',
-        port: process.env.DB_PORT,
-        logging: false 
-    }
-);
+const sequelize = new Sequelize({
+    dialect: 'postgres',
+    host: "ritikhotelmanagementproject.csolpezbn6us.ap-south-1.rds.amazonaws.com",
+    port: 5432,
+    username: "postgres",
+    password: "postgres431",
+    database: "Hotel_Management",
+    // Other options as needed
+    dialectOptions: {
+        ssl: {
+          require: true, // This will help you. But you will see nwe error
+          rejectUnauthorized: false // This line will fix new error
+        }
+      },
+});
 
-sequelize.authenticate()
-    .then(() => {
-        console.log('Database connected successfully.');
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
+const db = {};
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
-module.exports = sequelize;
+//exporting connection to other files
+module.exports = db;

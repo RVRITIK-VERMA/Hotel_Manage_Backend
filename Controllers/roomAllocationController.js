@@ -1,11 +1,11 @@
 const { QueryTypes } = require('sequelize');
-const sequelize = require('../Database/db');
+const db = require('../Database/db');
 
 
 // Retrieve all room details
 const getAllRoomsForHotel = async (req, res) => {
     try {
-        const allRooms = await sequelize.query(
+        const allRooms = await db.sequelize.query(
             "SELECT * FROM get_room_data_for_hotel ('get_all_rooms', NULL,NULL)",
             { type: QueryTypes.SELECT }
         );
@@ -36,7 +36,7 @@ const getAllRoomsForHotel = async (req, res) => {
 // Retrieve all room details
 const getCountOfVacantRoom = async (req, res) => {
     try {
-        const allRooms = await sequelize.query(
+        const allRooms = await db.sequelize.query(
             "SELECT * FROM get_room_data_for_hotel ('get_count_of_all_vacant_rooms', NULL,NULL)",
             { type: QueryTypes.SELECT }
         );
@@ -67,7 +67,7 @@ const getCountOfVacantRoom = async (req, res) => {
 const getRandomRoomsForAdmin = async (req, res) => {
     const { numberOfRooms } = req.body;
     try {
-        const allRooms = await sequelize.query(
+        const allRooms = await db.sequelize.query(
             "SELECT * FROM get_room_data_for_hotel (?,?,?)", 
             { replacements:['get_random_vacant_rooms',0,numberOfRooms],type: QueryTypes.SELECT }
         );
@@ -98,7 +98,7 @@ const getRandomRoomsForAdmin = async (req, res) => {
 // const getOptimalRooms = async (req, res) => {
 //     const { numberOfRooms } = req.body;
 //     try {
-//         const groupedRooms = await sequelize.query(
+//         const groupedRooms = await db.sequelize.query(
 //             "SELECT * FROM get_room_data_for_hotel ('get_vacant_rooms_grouped_by_floor', NULL)",
 //             { type: QueryTypes.SELECT }
 //         );
@@ -250,7 +250,7 @@ const getRandomRoomsForAdmin = async (req, res) => {
 const getOptimalRooms = async (req, res) => {
     const { numberOfRooms } = req.body;
     try {
-        const groupedRooms = await sequelize.query(
+        const groupedRooms = await db.sequelize.query(
             "SELECT * FROM get_room_data_for_hotel ('get_vacant_rooms_grouped_by_floor', NULL,NULL)",
             { type: QueryTypes.SELECT }
         );
