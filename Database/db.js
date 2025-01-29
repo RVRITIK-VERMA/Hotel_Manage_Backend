@@ -1,6 +1,6 @@
 require('dotenv').config();
 const {Sequelize}= require('sequelize');
-
+const pg = require('pg');
 const sequelize = new Sequelize({
     dialect: 'postgres',
     host: "ritikhotelmanagementproject.csolpezbn6us.ap-south-1.rds.amazonaws.com",
