@@ -7,7 +7,7 @@ const cors = require('cors');
 app.use(bodyParser.json());
 
 const corsOptions = {
-    origin: ['http://localhost:4200', '*'],
+    origin: ['http://localhost:4200', '*','https://hotel-management-mauve-psi.vercel.app'],
     optionsSuccessStatus: 200
   };
 app.use(cors(corsOptions));
